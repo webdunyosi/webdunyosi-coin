@@ -10,9 +10,9 @@ const Header = ({ student, onLogout }) => {
   }
 
   return (
-    <header className="w-full sticky top-0 right-0 z-40 bg-gradient-to-r from-zinc-900/95 via-zinc-950/95 to-zinc-900/95 backdrop-blur-lg text-white p-4 md:p-6 flex justify-between items-center border-b border-green-500/20 shadow-lg shadow-green-500/5">
+    <header className="w-5/6 ml-auto sticky top-0 right-0 z-40 bg-gradient-to-r from-zinc-900/95 via-zinc-950/95 to-zinc-900/95 backdrop-blur-lg text-white p-2 md:p-4 flex justify-between items-center border-b border-green-500/20 shadow-lg shadow-green-500/5">
       {/* Left: Coin Balance */}
-      <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-gradient-to-r from-green-500/10 to-lime-500/10 border border-green-500/20">
+      <div className="flex items-center gap-3 px-4 rounded-xl bg-gradient-to-r from-green-500/10 to-lime-500/10 border border-green-500/20">
         <div className="p-2 bg-gradient-to-br from-green-400 to-lime-300 rounded-lg">
           <img className="w-5" src="icons/coin.png" alt="Coin" />
         </div>
