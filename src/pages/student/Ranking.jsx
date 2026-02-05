@@ -5,7 +5,7 @@ const Ranking = () => {
   const sortedStudents = [...students].sort((a, b) => b.coins - a.coins)
 
   return (
-    <div className="relative w-full min-h-full bg-zinc-950/80 web-pattern">
+    <div className="w-5/6 ml-auto relative min-h-full bg-zinc-950/80 web-pattern">
       {/* Overlay */}
       <div className="absolute inset-0 "></div>
 
