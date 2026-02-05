@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "coins": 120,
+    "avatar": "/students/1.png"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "coins": 85,
+    "avatar": "/students/2.avif"
+  },
+  {
+    "id": 3,
+    "name": "Michael Brown",
+    "coins": 260,
+    "avatar": "/students/3.png"
+  },
+  {
+    "id": 4,
+    "name": "Emily Johnson",
+    "coins": 190,
+    "avatar": "/students/4.webp"
+  },
+  {
+    "id": 5,
+    "name": "David Wilson",
+    "coins": 310,
+    "avatar": "/students/5.webp"
+  },
+  {
+    "id": 6,
+    "name": "Sarah Davis",
+    "coins": 45,
+    "avatar": "/students/6.png"
+  },
+  {
+    "id": 7,
+    "name": "Daniel Miller",
+    "coins": 400,
+    "avatar": "/students/7.png"
+  },
+  {
+    "id": 8,
+    "name": "Olivia Taylor",
+    "coins": 275,
+    "avatar": "/students/8.png"
+  }
+]

@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* Enhanced web pattern background */
+.web-pattern {
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      rgba(0, 255, 136, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(0, 255, 136, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(57, 255, 20, 0.05) 0%,
+      transparent 70%
+    );
+  background-size: 800px 800px, 600px 600px, 1000px 1000px;
+  animation: float 8s ease-in-out infinite;
+  color: white;
+}
+
+/* animatsiya bo‘lishi uchun */
+@keyframes float {
+  0% {
+    background-position: 0 0, 0 0, 0 0;
+  }
+  50% {
+    background-position: 40px 40px, -40px -40px, 20px 20px;
+  }
+  100% {
+    background-position: 0 0, 0 0, 0 0;
+  }
+}
