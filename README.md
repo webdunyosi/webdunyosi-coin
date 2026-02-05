@@ -1,16 +1,44 @@
-# React + Vite
+# 🪙 WebCoin
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**WebCoin** — bu online o‘quvchilarni rag‘batlantirish uchun yaratilgan web platforma.  
+O‘quvchilar bajarilgan vazifalar uchun **coin**lar bilan taqdirlanadi va ushbu coinlarni tizim ichida **sovg‘alarga almashtirish** imkoniyatiga ega.
 
-Currently, two official plugins are available:
+🔗 **Live demo:**  
+https://webcoin-sigma.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🎯 Loyiha maqsadi
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Online o‘quvchilarni motivatsiya qilish  
+- Vazifa bajarganlik uchun coin berish  
+- To‘plangan coinlarni platformada saqlash  
+- Coinlarni sovg‘alar yoki bonuslarga almashtirish  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 👨‍🎓 O‘quvchilar uchun imkoniyatlar
+
+- Vazifalar orqali coin yig‘ish  
+- Coin balansini ko‘rish  
+- Coinlarni sovg‘alarga almashtirish  
+- Qiziqarli va motivatsion tizimda qatnashish  
+
+---
+
+## 🚀 Texnologiyalar
+
+Loyihada quyidagi texnologiyalar ishlatilgan:
+
+- **React**
+- **Vite**
+- **JavaScript (ES6+)**
+- **Tailwindcss**
+
+---
+
+## ⚙️ Loyihani ishga tushirish
+
+```bash
+npm install
+npm run dev
