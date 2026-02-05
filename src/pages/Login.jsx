@@ -122,22 +122,6 @@ const Login = ({ onLogin }) => {
             </button>
           </form>
 
-          {/* Demo Users */}
-          <div className="mt-8 pt-6 border-t border-green-500/20">
-            <p className="text-xs text-gray-400 mb-3 text-center">
-              Test akkauntlari:
-            </p>
-            <div className="space-y-2 text-xs">
-              <p className="text-gray-500 text-center">
-                <span className="text-green-400 font-semibold">Login:</span>{" "}
-                john_doe
-              </p>
-              <p className="text-gray-500 text-center">
-                <span className="text-green-400 font-semibold">Parol:</span>{" "}
-                password123
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* Bottom Text */}
