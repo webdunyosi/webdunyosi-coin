@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "username": "john_doe",
+    "password": "password123",
+    "coins": 120,
+    "avatar": "/students/1.png"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "username": "jane_smith",
+    "password": "password123",
+    "coins": 85,
+    "avatar": "/students/2.avif"
+  },
+  {
+    "id": 3,
+    "name": "Michael Brown",
+    "email": "michael@example.com",
+    "username": "michael_brown",
+    "password": "password123",
+    "coins": 260,
+    "avatar": "/students/3.png"
+  },
+  {
+    "id": 4,
+    "name": "Emily Johnson",
+    "email": "emily@example.com",
+    "username": "emily_johnson",
+    "password": "password123",
+    "coins": 190,
+    "avatar": "/students/4.webp"
+  },
+  {
+    "id": 5,
+    "name": "David Wilson",
+    "email": "david@example.com",
+    "username": "david_wilson",
+    "password": "password123",
+    "coins": 310,
+    "avatar": "/students/5.webp"
+  },
+  {
+    "id": 6,
+    "name": "Sarah Davis",
+    "email": "sarah@example.com",
+    "username": "sarah_davis",
+    "password": "password123",
+    "coins": 45,
+    "avatar": "/students/6.png"
+  },
+  {
+    "id": 7,
+    "name": "Daniel Miller",
+    "email": "daniel@example.com",
+    "username": "daniel_miller",
+    "password": "password123",
+    "coins": 400,
+    "avatar": "/students/7.png"
+  },
+  {
+    "id": 8,
+    "name": "Olivia Taylor",
+    "email": "olivia@example.com",
+    "username": "olivia_taylor",
+    "password": "password123",
+    "coins": 275,
+    "avatar": "/students/8.png"
+  }
+]
