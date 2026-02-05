@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
-import { MdLogout } from "react-icons/md"
+import { MdLogout, MdMenu } from "react-icons/md"
 
-const Header = ({ student, onLogout }) => {
+const Header = ({ student, onLogout, onMenuClick }) => {
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -10,19 +10,29 @@ const Header = ({ student, onLogout }) => {
   }
 
   return (
-    <header className="w-5/6 ml-auto sticky top-0 right-0 z-40 bg-gradient-to-r from-zinc-900/95 via-zinc-950/95 to-zinc-900/95 backdrop-blur-lg text-white p-2 md:p-4 flex justify-between items-center border-b border-green-500/20 shadow-lg shadow-green-500/5">
-      {/* Left: Coin Balance */}
-      <div className="flex items-center gap-3 px-4 rounded-xl bg-gradient-to-r from-green-500/10 to-lime-500/10 border border-green-500/20">
-        <div className="p-2 bg-gradient-to-br from-green-400 to-lime-300 rounded-lg">
-          <img className="w-5" src="icons/coin.png" alt="Coin" />
-        </div>
-        <div className="flex flex-col">
-          <span className="text-xs text-gray-400 uppercase tracking-wide">
-            Balans
-          </span>
-          <span className="text-lg font-bold text-lime-300">
-            {student.coins}
-          </span>
+    <header className="sticky top-0 z-40 bg-gradient-to-r from-zinc-900/95 via-zinc-950/95 to-zinc-900/95 backdrop-blur-lg text-white p-2 md:p-4 flex justify-between items-center border-b border-green-500/20 shadow-lg shadow-green-500/5">
+      {/* Left: Menu Button + Coin Balance */}
+      <div className="flex items-center gap-4">
+        <button
+          onClick={onMenuClick}
+          className="lg:hidden p-2 rounded-lg hover:bg-green-500/10 text-gray-400 hover:text-green-400 transition-all duration-300 border border-transparent hover:border-green-500/30"
+          title="Menu"
+        >
+          <MdMenu className="w-6 h-6" />
+        </button>
+
+        <div className="flex items-center gap-3 px-4 rounded-xl bg-gradient-to-r from-green-500/10 to-lime-500/10 border border-green-500/20">
+          <div className="p-2 bg-gradient-to-br from-green-400 to-lime-300 rounded-lg">
+            <img className="w-5" src="icons/coin.png" alt="Coin" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xs text-gray-400 uppercase tracking-wide">
+              Balans
+            </span>
+            <span className="text-lg font-bold text-lime-300">
+              {student.coins}
+            </span>
+          </div>
         </div>
       </div>
 

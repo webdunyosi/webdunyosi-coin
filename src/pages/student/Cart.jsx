@@ -46,7 +46,7 @@ const Cart = ({
   }
 
   return (
-    <div className="w-5/6 ml-auto relative min-h-full bg-zinc-950">
+    <div className="w-full relative min-h-full bg-zinc-950">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-green-900/10 via-transparent to-blue-900/10"></div>
 

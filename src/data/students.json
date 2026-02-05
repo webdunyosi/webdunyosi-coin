@@ -1,74 +1,65 @@
 [
   {
     "id": 1,
-    "name": "John Doe",
-    "email": "john@example.com",
-    "username": "john_doe",
-    "password": "password123",
-    "coins": 120,
+    "name": "Saydaliyev Salohiddin",
+    "email": "saidalievsalohiddin1@gmail.com",
+    "username": "salohiddin",
+    "password": "*salohiddin123*",
+    "coins": 1000,
     "avatar": "/students/1.png"
   },
   {
     "id": 2,
-    "name": "Jane Smith",
-    "email": "jane@example.com",
-    "username": "jane_smith",
-    "password": "password123",
-    "coins": 85,
-    "avatar": "/students/2.avif"
+    "name": "Muhammadiyev Javohir",
+    "email": "javohirweb0214@gmail.com",
+    "username": "javohir",
+    "password": "*javohir123*",
+    "coins": 1000,
+    "avatar": "/students/2.png"
   },
   {
     "id": 3,
-    "name": "Michael Brown",
-    "email": "michael@example.com",
-    "username": "michael_brown",
-    "password": "password123",
-    "coins": 260,
+    "name": "To'laganov Ulug'bek",
+    "email": "ulugbekabdullayevich@gmail.com",
+    "username": "ulugbek",
+    "password": "*ulugbek123*",
+    "coins": 1000,
     "avatar": "/students/3.png"
   },
   {
     "id": 4,
-    "name": "Emily Johnson",
-    "email": "emily@example.com",
-    "username": "emily_johnson",
-    "password": "password123",
-    "coins": 10090,
-    "avatar": "/students/4.webp"
+    "name": "Temirbekov Ahadjon",
+    "email": "ahadjontemirbekov149@gmail.com",
+    "username": "ahadjon",
+    "password": "*ahadjon123*",
+    "coins": 1000,
+    "avatar": "/students/4.png"
   },
   {
     "id": 5,
-    "name": "David Wilson",
-    "email": "david@example.com",
-    "username": "david_wilson",
-    "password": "password123",
-    "coins": 310,
-    "avatar": "/students/5.webp"
+    "name": "Mardayev Sayfiddin",
+    "email": "sayfiddinmardayev@gmail.com",
+    "username": "sayfiddin",
+    "password": "*sayfiddin123*",
+    "coins": 1000,
+    "avatar": "/students/5.png"
   },
   {
     "id": 6,
-    "name": "Sarah Davis",
-    "email": "sarah@example.com",
-    "username": "sarah_davis",
-    "password": "password123",
-    "coins": 45,
+    "name": "Narzullayev Jahongir",
+    "email": "jahongirnarzullayev033@gmail.com",
+    "username": "jahongir",
+    "password": "*jahongir123*",
+    "coins": 1000,
     "avatar": "/students/6.png"
   },
   {
     "id": 7,
-    "name": "Daniel Miller",
-    "email": "daniel@example.com",
-    "username": "daniel_miller",
-    "password": "password123",
-    "coins": 400,
+    "name": "Xamidova Baxshand",
+    "email": "hamidovabahsand@gmail.com",
+    "username": "baxshand",
+    "password": "*baxshand123*",
+    "coins": 1000,
     "avatar": "/students/7.png"
-  },
-  {
-    "id": 8,
-    "name": "Olivia Taylor",
-    "email": "olivia@example.com",
-    "username": "olivia_taylor",
-    "password": "password123",
-    "coins": 275,
-    "avatar": "/students/8.png"
   }
 ]

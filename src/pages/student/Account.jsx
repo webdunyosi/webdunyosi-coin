@@ -11,7 +11,7 @@ const Account = ({ student }) => {
   }
 
   return (
-    <div className="w-5/6 ml-auto relative min-h-full bg-zinc-950/80 web-pattern">
+    <div className="w-full relative min-h-full bg-zinc-950/80 web-pattern">
       {/* Overlay */}
       <div className="absolute inset-0"></div>
 
