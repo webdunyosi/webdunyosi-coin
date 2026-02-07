@@ -47,7 +47,11 @@ const Attendance = () => {
   // Komponenta yuklanganda birinchi darsni tanlash
   useEffect(() => {
     if (filteredClasses.length > 0) {
-      setSelectedClass(filteredClasses[0])
+      // Only set if current selected class is not in filtered list
+      const isSelectedInFiltered = selectedClass && filteredClasses.some(cls => cls.id === selectedClass.id)
+      if (!isSelectedInFiltered) {
+        setSelectedClass(filteredClasses[0])
+      }
     } else if (attendance && attendance.length > 0 && !selectedClass) {
       setSelectedClass(sortedClasses[0])
     }
@@ -131,13 +135,13 @@ const Attendance = () => {
           },
         )
       } else {
-        toast.warning(
-          "Davomat saqlandi, lekin Telegramga yuborishda xatolik yuz berdi.",
-          {
-            position: "top-center",
-            autoClose: 3000,
-          },
-        )
+        const errorMsg = telegramResult.error 
+          ? `Davomat saqlandi, lekin Telegramga yuborishda xatolik: ${telegramResult.error}`
+          : "Davomat saqlandi, lekin Telegramga yuborishda xatolik yuz berdi."
+        toast.warning(errorMsg, {
+          position: "top-center",
+          autoClose: 4000,
+        })
       }
     } catch (e) {
       console.error("Failed to save attendance:", e)

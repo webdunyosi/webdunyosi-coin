@@ -58,14 +58,26 @@ export const sendAttendanceToTelegram = async (
   absentStudents,
 ) => {
   try {
+    // Validate date format
+    if (!selectedClass.date) {
+      throw new Error("Sana ma'lumoti mavjud emas")
+    }
+
     // Format date nicely
     const date = new Date(selectedClass.date)
+    if (isNaN(date.getTime())) {
+      throw new Error("Noto'g'ri sana formati")
+    }
+    
     const formattedDate = date.toLocaleDateString("uz-UZ", {
       weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
     })
+    
+    // Capture timestamp at the start
+    const saveTimestamp = new Date().toLocaleString("uz-UZ")
 
     // Build beautiful message
     let message = `📋 *Davomat ma'lumotlari*\n\n`
@@ -102,7 +114,7 @@ export const sendAttendanceToTelegram = async (
       })
     }
 
-    message += `\n⏰ *Saqlangan vaqt:* ${new Date().toLocaleString("uz-UZ")}`
+    message += `\n⏰ *Saqlangan vaqt:* ${saveTimestamp}`
 
     // Send to Telegram
     const response = await fetch(TELEGRAM_API_URL, {
