@@ -15,5 +15,9 @@ export const iconMap = {
 // Helper function to get icon component
 export const getIcon = (iconName, className = "w-5 h-5") => {
   const IconComponent = iconMap[iconName]
-  return IconComponent ? <IconComponent className={className} /> : null
+  if (!IconComponent) {
+    console.warn(`Icon "${iconName}" not found in iconMap`)
+    return null
+  }
+  return <IconComponent className={className} />
 }
