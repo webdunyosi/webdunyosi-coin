@@ -1,0 +1,33 @@
+
+[
+  {
+    "id": 1,
+    "title": "Sovg'alar",
+    "icon": "IoGift",
+    "path": "/sovgalar"
+  },
+  {
+    "id": 2,
+    "title": "Reyting",
+    "icon": "FaChartLine",
+    "path": "/reyting"
+  },
+  {
+    "id": 3,
+    "title": "Davomat",
+    "icon": "FaClipboardList",
+    "path": "/davomat"
+  },
+  {
+    "id": 4,
+    "title": "Savatcha",
+    "icon": "MdShoppingCart",
+    "path": "/savatcha"
+  },
+  {
+    "id": 5,
+    "title": "Xisobim",
+    "icon": "GiBanknote",
+    "path": "/xisobim"
+  }
+]
