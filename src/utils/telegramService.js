@@ -50,3 +50,95 @@ export const sendCartToTelegram = async (studentName, cartItems) => {
     return { success: false, error: error.message }
   }
 }
+
+export const sendAttendanceToTelegram = async (
+  classInfo,
+  students,
+  attendeeIds,
+) => {
+  try {
+    // Format date
+    const formatDate = (dateString) => {
+      const date = new Date(dateString)
+      const day = date.getDate().toString().padStart(2, "0")
+      const month = (date.getMonth() + 1).toString().padStart(2, "0")
+      const year = date.getFullYear()
+      return `${day}.${month}.${year}`
+    }
+
+    // Create beautiful formatted message
+    let message = `📋 *DAVOMAT MA'LUMOTLARI*\n\n`
+    message += `📅 *Sana:* ${formatDate(classInfo.date)}\n`
+    message += `📆 *Kun:* ${classInfo.day}\n`
+    message += `🕐 *Vaqt:* ${classInfo.time}\n`
+    message += `⏰ *Saqlangan vaqt:* ${new Date().toLocaleString("uz-UZ")}\n\n`
+
+    // Separate students into present and absent
+    const presentStudents = students.filter((student) =>
+      attendeeIds.includes(student.id),
+    )
+    const absentStudents = students.filter(
+      (student) => !attendeeIds.includes(student.id),
+    )
+
+    // Present students section
+    message += `✅ *KELGAN O'QUVCHILAR (${presentStudents.length}):*\n`
+    if (presentStudents.length > 0) {
+      presentStudents.forEach((student, index) => {
+        message += `${index + 1}. ${student.name}\n`
+      })
+    } else {
+      message += `Hech kim kelmadi\n`
+    }
+
+    message += `\n`
+
+    // Absent students section
+    message += `❌ *KELMAGAN O'QUVCHILAR (${absentStudents.length}):*\n`
+    if (absentStudents.length > 0) {
+      absentStudents.forEach((student, index) => {
+        message += `${index + 1}. ${student.name}\n`
+      })
+    } else {
+      message += `Hamma keldi\n`
+    }
+
+    message += `\n`
+
+    // Statistics
+    const totalStudents = students.length
+    const attendancePercentage =
+      totalStudents > 0
+        ? Math.round((presentStudents.length / totalStudents) * 100)
+        : 0
+    message += `📊 *STATISTIKA:*\n`
+    message += `• Jami o'quvchilar: ${totalStudents}\n`
+    message += `• Kelganlar: ${presentStudents.length}\n`
+    message += `• Kelmaganlar: ${absentStudents.length}\n`
+    message += `• Davomat foizi: ${attendancePercentage}%\n`
+
+    // Send to Telegram
+    const response = await fetch(TELEGRAM_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: "Markdown",
+      }),
+    })
+
+    const data = await response.json()
+
+    if (data.ok) {
+      return { success: true, message: "Davomat yuborildi!" }
+    } else {
+      return { success: false, error: "Xatolik yuz berdi" }
+    }
+  } catch (error) {
+    console.error("Telegram send error:", error)
+    return { success: false, error: error.message }
+  }
+}

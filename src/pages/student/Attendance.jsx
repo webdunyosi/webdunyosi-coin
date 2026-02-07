@@ -3,6 +3,7 @@ import students from "../../data/students.json"
 import attendanceData from "../../data/attendance.json"
 import { FaCheckCircle, FaTimesCircle, FaSave } from "react-icons/fa"
 import { toast } from "react-toastify"
+import { sendAttendanceToTelegram } from "../../utils/telegramService"
 
 const Attendance = () => {
   // localStorage'dan davomat ma'lumotlarini yuklash
@@ -84,13 +85,34 @@ const Attendance = () => {
   }
 
   // localStorage'ga saqlash
-  const saveAttendance = () => {
+  const saveAttendance = async () => {
     try {
       localStorage.setItem("webcoin_attendance", JSON.stringify(attendance))
       toast.success("Davomat muvaffaqiyatli saqlandi! ✅", {
         position: "top-center",
         autoClose: 2000,
       })
+
+      // Send attendance to Telegram
+      if (selectedClass) {
+        const result = await sendAttendanceToTelegram(
+          selectedClass,
+          students,
+          selectedClass.attendees,
+        )
+
+        if (result.success) {
+          toast.success("Davomat Telegram botga yuborildi! 📲", {
+            position: "top-center",
+            autoClose: 2000,
+          })
+        } else {
+          toast.warning("Telegram botga yuborishda xatolik: " + result.error, {
+            position: "top-center",
+            autoClose: 3000,
+          })
+        }
+      }
     } catch (e) {
       console.error("Failed to save attendance to localStorage:", e)
       toast.error("Davomatni saqlashda xatolik yuz berdi!", {
