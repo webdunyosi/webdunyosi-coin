@@ -6,7 +6,8 @@
     "username": "salohiddin",
     "password": "*salohiddin123*",
     "coins": 0,
-    "avatar": "/students/1.png"
+    "avatar": "/students/1.png",
+    "role": "student"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "username": "javohir",
     "password": "*javohir123*",
     "coins": 30,
-    "avatar": "/students/2.png"
+    "avatar": "/students/2.png",
+    "role": "student"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "username": "ulugbek",
     "password": "*ulugbek123*",
     "coins": 0,
-    "avatar": "/students/3.png"
+    "avatar": "/students/3.png",
+    "role": "student"
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "username": "ahadjon",
     "password": "*ahadjon123*",
     "coins": 15,
-    "avatar": "/students/4.png"
+    "avatar": "/students/4.png",
+    "role": "student"
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "username": "sayfiddin",
     "password": "*sayfiddin123*",
     "coins": 10,
-    "avatar": "/students/5.png"
+    "avatar": "/students/5.png",
+    "role": "student"
   },
   {
     "id": 6,
@@ -51,7 +56,8 @@
     "username": "jahongir",
     "password": "*jahongir123*",
     "coins": 30,
-    "avatar": "/students/6.png"
+    "avatar": "/students/6.png",
+    "role": "student"
   },
   {
     "id": 7,
@@ -60,6 +66,17 @@
     "username": "baxshand",
     "password": "*baxshand123*",
     "coins": 0,
-    "avatar": "/students/7.png"
+    "avatar": "/students/7.png",
+    "role": "student"
+  },
+  {
+    "id": 8,
+    "name": "Teacher",
+    "email": "teacher@webdunyosi.com",
+    "username": "teacher",
+    "password": "*teacher123*",
+    "coins": 0,
+    "avatar": "/students/1.png",
+    "role": "teacher"
   }
 ]
