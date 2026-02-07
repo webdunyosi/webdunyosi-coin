@@ -16,7 +16,7 @@ const iconMap = {
 
 const menu = menuData.map((item) => ({
   ...item,
-  icon: iconMap[item.icon],
+  icon: iconMap[item.icon] || null,
 }))
 
 const Sidebar = ({ isOpen, onClose }) => {
