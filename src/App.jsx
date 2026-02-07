@@ -196,7 +196,7 @@ function App() {
         element={
           loggedInUser ? (
             <StudentLayout user={loggedInUser} onLogout={handleLogout}>
-              <Attendance />
+              <Attendance user={loggedInUser} />
             </StudentLayout>
           ) : (
             <Navigate to="/login" />
