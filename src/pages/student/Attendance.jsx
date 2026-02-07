@@ -22,7 +22,7 @@ const Attendance = () => {
 
   // O'quvchi darsga kelganligini tekshirish
   const isPresent = (studentId) => {
-    return selectedClass.attendees.includes(studentId)
+    return selectedClass?.attendees?.includes(studentId) || false
   }
 
   // Davomat statistikasini hisoblash
@@ -33,6 +33,20 @@ const Attendance = () => {
     ).length
     const percentage = Math.round((attended / totalClasses) * 100)
     return { attended, total: totalClasses, percentage }
+  }
+
+  // Ma'lumotlar mavjudligini tekshirish
+  if (!attendance || attendance.length === 0) {
+    return (
+      <div className="w-full relative min-h-full bg-zinc-950/80 web-pattern">
+        <div className="relative z-10 p-6">
+          <h2 className="text-2xl font-bold text-white mb-6">📋 Davomat</h2>
+          <p className="text-gray-400">
+            Hozircha davomat ma'lumotlari mavjud emas.
+          </p>
+        </div>
+      </div>
+    )
   }
 
   return (
