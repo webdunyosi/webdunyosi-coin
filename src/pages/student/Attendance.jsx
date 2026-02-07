@@ -1,8 +1,11 @@
 import { useState, useEffect, useMemo } from "react"
 import students from "../../data/students.json"
 import attendanceData from "../../data/attendance.json"
-import { FaCheckCircle, FaTimesCircle, FaSave } from "react-icons/fa"
+import { FaCheckCircle, FaTimesCircle, FaSave, FaCalendarAlt } from "react-icons/fa"
 import { toast } from "react-toastify"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { sendAttendanceToTelegram } from "../../utils/telegramService"
 
 const Attendance = () => {
   // localStorage'dan davomat ma'lumotlarini yuklash
@@ -21,6 +24,13 @@ const Attendance = () => {
 
   const [attendance, setAttendance] = useState(loadAttendance())
   const [selectedClass, setSelectedClass] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(new Date())
+
+  // Filter classes by selected date
+  const filteredClasses = useMemo(() => {
+    const selectedDateStr = selectedDate.toISOString().split("T")[0]
+    return attendance.filter((cls) => cls.date === selectedDateStr)
+  }, [attendance, selectedDate])
 
   // Eng so'ngi darslarni olish (memoized)
   const sortedClasses = useMemo(() => {
@@ -29,12 +39,19 @@ const Attendance = () => {
     )
   }, [attendance])
 
+  // Get all dates that have classes
+  const datesWithClasses = useMemo(() => {
+    return attendance.map((cls) => new Date(cls.date))
+  }, [attendance])
+
   // Komponenta yuklanganda birinchi darsni tanlash
   useEffect(() => {
-    if (attendance && attendance.length > 0 && !selectedClass) {
+    if (filteredClasses.length > 0) {
+      setSelectedClass(filteredClasses[0])
+    } else if (attendance && attendance.length > 0 && !selectedClass) {
       setSelectedClass(sortedClasses[0])
     }
-  }, [attendance, selectedClass, sortedClasses])
+  }, [attendance, selectedClass, sortedClasses, filteredClasses])
 
   // Sanani formatlash
   const formatDate = (dateString) => {
@@ -83,16 +100,47 @@ const Attendance = () => {
     setSelectedClass(updatedSelectedClass)
   }
 
-  // localStorage'ga saqlash
-  const saveAttendance = () => {
+  // localStorage'ga saqlash va Telegramga yuborish
+  const saveAttendance = async () => {
     try {
       localStorage.setItem("webcoin_attendance", JSON.stringify(attendance))
-      toast.success("Davomat muvaffaqiyatli saqlandi! ✅", {
-        position: "top-center",
-        autoClose: 2000,
-      })
+      
+      // Get present and absent students for selected class
+      const presentStudentIds = selectedClass?.attendees || []
+      const presentStudents = students.filter((s) =>
+        presentStudentIds.includes(s.id),
+      )
+      const absentStudents = students.filter(
+        (s) => !presentStudentIds.includes(s.id),
+      )
+
+      // Send to Telegram
+      const telegramResult = await sendAttendanceToTelegram(
+        selectedClass,
+        students,
+        presentStudents,
+        absentStudents,
+      )
+
+      if (telegramResult.success) {
+        toast.success(
+          "Davomat saqlandi va Telegramga yuborildi! ✅",
+          {
+            position: "top-center",
+            autoClose: 3000,
+          },
+        )
+      } else {
+        toast.warning(
+          "Davomat saqlandi, lekin Telegramga yuborishda xatolik yuz berdi.",
+          {
+            position: "top-center",
+            autoClose: 3000,
+          },
+        )
+      }
     } catch (e) {
-      console.error("Failed to save attendance to localStorage:", e)
+      console.error("Failed to save attendance:", e)
       toast.error("Davomatni saqlashda xatolik yuz berdi!", {
         position: "top-center",
         autoClose: 3000,
@@ -153,34 +201,63 @@ const Attendance = () => {
 
         {/* Dars tanlash */}
         <div className="mb-6">
-          <label className="block text-gray-300 mb-2 text-sm">
-            Darsni tanlang:
+          <label className="block text-gray-300 mb-3 text-sm font-medium">
+            📅 Darsni tanlang:
           </label>
-          <select
-            value={selectedClass.id}
-            onChange={(e) =>
-              setSelectedClass(
-                sortedClasses.find(
-                  (cls) => cls.id === parseInt(e.target.value),
-                ),
-              )
-            }
-            className="w-full md:w-auto px-4 py-2 bg-zinc-900 text-white rounded-lg border border-green-500/30 focus:outline-none focus:border-green-500"
-          >
-            {sortedClasses.map((cls) => (
-              <option key={cls.id} value={cls.id}>
-                {cls.day}, {formatDate(cls.date)} - {cls.time}
-              </option>
-            ))}
-          </select>
+          
+          {/* Modern Calendar Picker */}
+          <div className="bg-zinc-900/70 rounded-xl p-4 border border-green-500/30">
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              inline
+              highlightDates={datesWithClasses}
+              dateFormat="dd.MM.yyyy"
+              className="w-full"
+              calendarClassName="react-datepicker-custom"
+            />
+          </div>
+
+          {/* Show filtered classes for selected date */}
+          {filteredClasses.length > 0 ? (
+            <div className="mt-4">
+              <label className="block text-gray-300 mb-2 text-sm">
+                Tanlangan kun darslari:
+              </label>
+              <select
+                value={selectedClass?.id || ""}
+                onChange={(e) =>
+                  setSelectedClass(
+                    filteredClasses.find(
+                      (cls) => cls.id === parseInt(e.target.value),
+                    ),
+                  )
+                }
+                className="w-full md:w-auto px-4 py-2 bg-zinc-900 text-white rounded-lg border border-green-500/30 focus:outline-none focus:border-green-500"
+              >
+                {filteredClasses.map((cls) => (
+                  <option key={cls.id} value={cls.id}>
+                    {cls.day}, {formatDate(cls.date)} - {cls.time}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : (
+            <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+              <p className="text-sm text-yellow-300">
+                ℹ️ Tanlangan sana uchun darslar mavjud emas
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Davomat jadvali */}
-        <div className="bg-zinc-900/70 rounded-xl p-6 border border-green-500/20 mb-6">
-          <h3 className="text-lg font-semibold text-green-400 mb-4">
-            {selectedClass.day}, {formatDate(selectedClass.date)} -{" "}
-            {selectedClass.time}
-          </h3>
+        {selectedClass && filteredClasses.length > 0 && (
+          <div className="bg-zinc-900/70 rounded-xl p-6 border border-green-500/20 mb-6">
+            <h3 className="text-lg font-semibold text-green-400 mb-4">
+              {selectedClass.day}, {formatDate(selectedClass.date)} -{" "}
+              {selectedClass.time}
+            </h3>
 
           <div className="space-y-3">
             {students.map((student) => {
@@ -236,6 +313,7 @@ const Attendance = () => {
             })}
           </div>
         </div>
+        )}
 
         {/* Dars jadvali ma'lumoti */}
         <div className="bg-linear-to-r from-green-500/10 to-lime-500/10 rounded-xl p-6 border border-green-500/20">
