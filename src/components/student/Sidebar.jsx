@@ -4,39 +4,20 @@ import { FaChartLine, FaClipboardList } from "react-icons/fa6"
 import { GiBanknote } from "react-icons/gi"
 import { IoGift } from "react-icons/io5"
 import { MdShoppingCart, MdClose } from "react-icons/md"
+import menuData from "../../data/menu.json"
 
-const menu = [
-  {
-    id: 1,
-    title: "Sovg'alar",
-    icon: <IoGift className="w-5 h-5" />,
-    path: "/sovgalar",
-  },
-  {
-    id: 2,
-    title: "Reyting",
-    icon: <FaChartLine className="w-5 h-5" />,
-    path: "/reyting",
-  },
-  {
-    id: 3,
-    title: "Davomat",
-    icon: <FaClipboardList className="w-5 h-5" />,
-    path: "/davomat",
-  },
-  {
-    id: 4,
-    title: "Savatcha",
-    icon: <MdShoppingCart className="w-5 h-5" />,
-    path: "/savatcha",
-  },
-  {
-    id: 5,
-    title: "Xisobim",
-    icon: <GiBanknote className="w-5 h-5" />,
-    path: "/xisobim",
-  },
-]
+const iconMap = {
+  IoGift: IoGift,
+  FaChartLine: FaChartLine,
+  FaClipboardList: FaClipboardList,
+  MdShoppingCart: MdShoppingCart,
+  GiBanknote: GiBanknote,
+}
+
+const menu = menuData.map((item) => ({
+  ...item,
+  icon: iconMap[item.icon],
+}))
 
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation()
@@ -99,7 +80,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                     : "text-gray-400"
                 }`}
               >
-                {item.icon}
+                {item.icon && <item.icon className="w-5 h-5" />}
               </span>
               <span className="text-sm font-medium">{item.title}</span>
             </Link>
