@@ -50,3 +50,94 @@ export const sendCartToTelegram = async (studentName, cartItems) => {
     return { success: false, error: error.message }
   }
 }
+
+export const sendAttendanceToTelegram = async (
+  selectedClass,
+  students,
+  presentStudents,
+  absentStudents,
+) => {
+  try {
+    // Validate date format
+    if (!selectedClass.date) {
+      throw new Error("Sana ma'lumoti mavjud emas")
+    }
+
+    // Format date nicely
+    const date = new Date(selectedClass.date)
+    if (isNaN(date.getTime())) {
+      throw new Error("Noto'g'ri sana formati")
+    }
+    
+    const formattedDate = date.toLocaleDateString("uz-UZ", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    
+    // Capture timestamp at the start
+    const saveTimestamp = new Date().toLocaleString("uz-UZ")
+
+    // Build beautiful message
+    let message = `📋 *Davomat ma'lumotlari*\n\n`
+    message += `📅 *Sana:* ${formattedDate}\n`
+    message += `🕐 *Vaqt:* ${selectedClass.time}\n`
+    message += `📝 *Dars:* ${selectedClass.day}\n\n`
+
+    // Statistics
+    const totalStudents = students.length
+    const presentCount = presentStudents.length
+    const absentCount = absentStudents.length
+    const attendancePercentage = Math.round(
+      (presentCount / totalStudents) * 100,
+    )
+
+    message += `📊 *Statistika:*\n`
+    message += `✅ Kelganlar: ${presentCount}/${totalStudents} (${attendancePercentage}%)\n`
+    message += `❌ Kelmaganlar: ${absentCount}/${totalStudents}\n\n`
+
+    // Present students
+    if (presentCount > 0) {
+      message += `✅ *Kelgan o'quvchilar:*\n`
+      presentStudents.forEach((student, index) => {
+        message += `${index + 1}. ${student.name}\n`
+      })
+      message += `\n`
+    }
+
+    // Absent students
+    if (absentCount > 0) {
+      message += `❌ *Kelmagan o'quvchilar:*\n`
+      absentStudents.forEach((student, index) => {
+        message += `${index + 1}. ${student.name}\n`
+      })
+    }
+
+    message += `\n⏰ *Saqlangan vaqt:* ${saveTimestamp}`
+
+    // Send to Telegram
+    const response = await fetch(TELEGRAM_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: "Markdown",
+      }),
+    })
+
+    const data = await response.json()
+
+    if (data.ok) {
+      return { success: true, message: "Davomat Telegramga yuborildi!" }
+    } else {
+      return { success: false, error: "Xatolik yuz berdi" }
+    }
+  } catch (error) {
+    console.error("Telegram send error:", error)
+    return { success: false, error: error.message }
+  }
+}
