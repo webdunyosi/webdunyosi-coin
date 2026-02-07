@@ -4,7 +4,9 @@ import attendanceData from "../../data/attendance.json"
 import { FaCheckCircle, FaTimesCircle, FaSave } from "react-icons/fa"
 import { toast } from "react-toastify"
 
-const Attendance = () => {
+const Attendance = ({ user }) => {
+  // Check if user is a teacher
+  const isTeacher = user?.role === "teacher"
   // localStorage'dan davomat ma'lumotlarini yuklash
   const loadAttendance = () => {
     const saved = localStorage.getItem("webcoin_attendance")
@@ -131,23 +133,31 @@ const Attendance = () => {
         {/* Header with Save Button */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-white">📋 Davomat</h2>
-          <button
-            onClick={saveAttendance}
-            className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors shadow-lg shadow-green-500/30"
-          >
-            <FaSave />
-            <span className="hidden sm:inline">Saqlash</span>
-          </button>
+          {isTeacher && (
+            <button
+              onClick={saveAttendance}
+              className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors shadow-lg shadow-green-500/30"
+            >
+              <FaSave />
+              <span className="hidden sm:inline">Saqlash</span>
+            </button>
+          )}
         </div>
 
         {/* Info message */}
         <div
           className="mb-4 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg"
           role="status"
-          aria-label="Ma'lumot: O'quvchi kartasini bosib davomat holatini o'zgartiring"
+          aria-label={
+            isTeacher
+              ? "Ma'lumot: O'quvchi kartasini bosib davomat holatini o'zgartiring"
+              : "Ma'lumot: Davomat ma'lumotlari faqat ko'rish uchun"
+          }
         >
           <p className="text-sm text-blue-300">
-            💡 O'quvchi kartasini bosing va davomat holatini o'zgartiring
+            {isTeacher
+              ? "💡 O'quvchi kartasini bosing va davomat holatini o'zgartiring"
+              : "👁️ Davomat ma'lumotlarini ko'rishingiz mumkin (faqat ko'rish)"}
           </p>
         </div>
 
@@ -190,11 +200,13 @@ const Attendance = () => {
               return (
                 <div
                   key={student.id}
-                  onClick={() => toggleAttendance(student.id)}
-                  className={`flex items-center justify-between p-4 rounded-lg transition-all cursor-pointer hover:scale-[1.02] ${
+                  onClick={() => isTeacher && toggleAttendance(student.id)}
+                  className={`flex items-center justify-between p-4 rounded-lg transition-all ${
+                    isTeacher ? "cursor-pointer hover:scale-[1.02]" : "cursor-default"
+                  } ${
                     present
-                      ? "bg-green-500/10 border border-green-500/30 hover:bg-green-500/20"
-                      : "bg-red-500/10 border border-red-500/30 hover:bg-red-500/20"
+                      ? `bg-green-500/10 border border-green-500/30 ${isTeacher ? "hover:bg-green-500/20" : ""}`
+                      : `bg-red-500/10 border border-red-500/30 ${isTeacher ? "hover:bg-red-500/20" : ""}`
                   }`}
                 >
                   {/* O'quvchi ma'lumotlari */}
