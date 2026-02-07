@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom"
 import { Link } from "react-router-dom"
-import { FaChartLine } from "react-icons/fa6"
+import { FaChartLine, FaClipboardList } from "react-icons/fa6"
 import { GiBanknote } from "react-icons/gi"
 import { IoGift } from "react-icons/io5"
 import { MdShoppingCart, MdClose } from "react-icons/md"
@@ -20,12 +20,18 @@ const menu = [
   },
   {
     id: 3,
+    title: "Davomat",
+    icon: <FaClipboardList className="w-5 h-5" />,
+    path: "/davomat",
+  },
+  {
+    id: 4,
     title: "Savatcha",
     icon: <MdShoppingCart className="w-5 h-5" />,
     path: "/savatcha",
   },
   {
-    id: 4,
+    id: 5,
     title: "Xisobim",
     icon: <GiBanknote className="w-5 h-5" />,
     path: "/xisobim",

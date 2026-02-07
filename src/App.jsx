@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 import StudentLayout from "./layouts/StudentLayout"
 import Ranking from "./pages/student/Ranking"
 import Shopping from "./pages/student/Shopping"
 import Account from "./pages/student/Account"
 import Cart from "./pages/student/Cart"
+import Attendance from "./pages/student/Attendance"
 import Login from "./pages/Login"
 
 function App() {
@@ -135,7 +138,20 @@ function App() {
   }
 
   return (
-    <Routes>
+    <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      <Routes>
       {/* Login Route */}
       <Route
         path="/login"
@@ -168,6 +184,19 @@ function App() {
           loggedInUser ? (
             <StudentLayout user={loggedInUser} onLogout={handleLogout}>
               <Shopping onAddToCart={handleAddToCart} />
+            </StudentLayout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+
+      <Route
+        path="/davomat"
+        element={
+          loggedInUser ? (
+            <StudentLayout user={loggedInUser} onLogout={handleLogout}>
+              <Attendance />
             </StudentLayout>
           ) : (
             <Navigate to="/login" />
@@ -214,6 +243,7 @@ function App() {
         element={<Navigate to={loggedInUser ? "/reyting" : "/login"} />}
       />
     </Routes>
+    </>
   )
 }
 
