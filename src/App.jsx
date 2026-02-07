@@ -5,6 +5,7 @@ import Ranking from "./pages/student/Ranking"
 import Shopping from "./pages/student/Shopping"
 import Account from "./pages/student/Account"
 import Cart from "./pages/student/Cart"
+import Attendance from "./pages/student/Attendance"
 import Login from "./pages/Login"
 
 function App() {
@@ -168,6 +169,19 @@ function App() {
           loggedInUser ? (
             <StudentLayout user={loggedInUser} onLogout={handleLogout}>
               <Shopping onAddToCart={handleAddToCart} />
+            </StudentLayout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+
+      <Route
+        path="/davomat"
+        element={
+          loggedInUser ? (
+            <StudentLayout user={loggedInUser} onLogout={handleLogout}>
+              <Attendance />
             </StudentLayout>
           ) : (
             <Navigate to="/login" />
