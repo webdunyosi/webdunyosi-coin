@@ -184,7 +184,7 @@ function App() {
         element={
           loggedInUser ? (
             <StudentLayout user={loggedInUser} onLogout={handleLogout}>
-              <Shopping onAddToCart={handleAddToCart} />
+              <Shopping student={loggedInUser} onAddToCart={handleAddToCart} />
             </StudentLayout>
           ) : (
             <Navigate to="/login" />

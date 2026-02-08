@@ -71,53 +71,11 @@ const Shopping = ({ student, onAddToCart }) => {
 
   return (
     <div className="w-full relative min-h-full bg-zinc-950">
-      {/* Red Background Overlay for Debt */}
-      {hasDebt && (
-        <div className="absolute inset-0 bg-red-600/30 z-[5]"></div>
-      )}
-
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-linear-to-br from-green-900/10 via-transparent to-blue-900/10"></div>
 
       {/* Content */}
-      <div className="relative z-10 p-4 md:p-6 lg:p-8">
-        {/* Debt Warning Banner */}
-        {hasDebt && (
-          <div className="mb-6 md:mb-8 bg-red-500/90 border-2 border-red-400 rounded-xl p-6 shadow-2xl relative z-20">
-            <div className="flex items-start gap-4">
-              <MdWarning className="w-8 h-8 md:w-10 md:h-10 text-white flex-shrink-0 mt-1" />
-              <div className="flex-1">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
-                  Qarzdorlik haqida ogohlantirish!
-                </h3>
-                <div className="space-y-2 text-white">
-                  <p className="text-base md:text-lg">
-                    <span className="font-semibold">Sabab:</span> Kurs to'lovi to'liq to'lanmagan
-                  </p>
-                  <p className="text-base md:text-lg">
-                    <span className="font-semibold">Qarz miqdori:</span>{" "}
-                    <span className="text-2xl font-bold">{formatCurrency(student.debt)} so'm</span>
-                  </p>
-                  {unpaidMonths.length > 0 && (
-                    <p className="text-base md:text-lg">
-                      <span className="font-semibold">To'lanmagan oylar:</span>{" "}
-                      {unpaidMonths.map((m, i) => (
-                        <span key={i}>
-                          {m.month} {m.year}
-                          {i < unpaidMonths.length - 1 ? ", " : ""}
-                        </span>
-                      ))}
-                    </p>
-                  )}
-                </div>
-                <p className="text-sm md:text-base text-red-100 mt-3">
-                  Iltimos, qarzdorlikni to'ldiring. Sovg'alarni sotib olish uchun avval to'lovni amalga oshiring.
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
+      <div className={`relative z-10 p-4 md:p-6 lg:p-8 ${hasDebt ? "overflow-hidden max-h-screen" : ""}`}>
         <div className="mb-6 md:mb-8">
           <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-white flex items-center gap-2">
             <LuClipboardList className="w-8 h-8" />
@@ -128,19 +86,78 @@ const Shopping = ({ student, onAddToCart }) => {
           </p>
         </div>
 
-        {/* Products Grid with dimming effect when debt exists */}
+        {/* Products Grid with blocking when debt exists */}
         <div 
-          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ${hasDebt ? "opacity-60" : ""}`}
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ${hasDebt ? "pointer-events-none select-none" : ""}`}
         >
           {products.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
               onAddToCart={onAddToCart}
+              disabled={hasDebt}
             />
           ))}
         </div>
       </div>
+
+      {/* Payment Required Modal Overlay */}
+      {hasDebt && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden">
+          {/* Red Blur Background */}
+          <div 
+            className="absolute inset-0 bg-red-600/40 backdrop-blur-md"
+            style={{ backdropFilter: "blur(8px)" }}
+          ></div>
+          
+          {/* Modal Content */}
+          <div className="relative bg-zinc-900/95 border-4 border-red-500 rounded-2xl p-6 md:p-8 lg:p-10 max-w-2xl w-full shadow-2xl shadow-red-500/50 animate-pulse">
+            <div className="flex flex-col items-center text-center space-y-6">
+              {/* Warning Icon */}
+              <div className="bg-red-500/20 p-6 rounded-full">
+                <MdWarning className="w-16 h-16 md:w-20 md:h-20 text-red-500" />
+              </div>
+
+              {/* Title */}
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                To'lov qilinmagan!
+              </h2>
+
+              {/* Information */}
+              <div className="space-y-4 w-full">
+                <div className="bg-red-500/10 border-2 border-red-500/50 rounded-xl p-4">
+                  <p className="text-gray-300 text-sm md:text-base mb-2">Qarz miqdori:</p>
+                  <p className="text-3xl md:text-4xl font-bold text-red-400">
+                    {formatCurrency(student.debt)} so'm
+                  </p>
+                </div>
+
+                {unpaidMonths.length > 0 && (
+                  <div className="bg-red-500/10 border-2 border-red-500/50 rounded-xl p-4">
+                    <p className="text-gray-300 text-sm md:text-base mb-2">To'lanmagan oylar:</p>
+                    <p className="text-xl md:text-2xl font-semibold text-red-300">
+                      {unpaidMonths.map((m, i) => (
+                        <span key={i}>
+                          {m.month} {m.year}
+                          {i < unpaidMonths.length - 1 ? ", " : ""}
+                        </span>
+                      ))}
+                    </p>
+                  </div>
+                )}
+
+                {/* Message */}
+                <div className="bg-zinc-800/80 border-2 border-yellow-500/50 rounded-xl p-4">
+                  <p className="text-yellow-200 text-base md:text-lg leading-relaxed">
+                    ⚠️ Sovg'alarni sotib olish uchun avval to'lovni amalga oshiring.
+                    To'lov qilingandan so'ng sovg'alarni xarid qilishingiz mumkin bo'ladi.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
