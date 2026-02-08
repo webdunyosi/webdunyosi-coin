@@ -163,7 +163,9 @@ const Payments = ({ student }) => {
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText("4073420068208093")
-                    // You can add a toast notification here if desired
+                      .catch(() => {
+                        // Silently fail if clipboard access is denied
+                      })
                   }}
                   className="text-purple-400 hover:text-purple-300 transition-colors"
                   title="Nusxa olish"
