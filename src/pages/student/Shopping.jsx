@@ -112,7 +112,7 @@ const Shopping = ({ student, onAddToCart }) => {
         >
           {/* Red Blur Background */}
           <div 
-            className="absolute inset-0 bg-red-600/40 backdrop-blur-md"
+            className="absolute inset-0 bg-red-600/40"
             style={{ backdropFilter: "blur(8px)" }}
           ></div>
           

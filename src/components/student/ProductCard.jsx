@@ -25,7 +25,7 @@ const ProductCard = ({ product, onAddToCart, disabled = false }) => {
             {product.price} Coin
           </p>
           <button
-            onClick={() => !disabled && onAddToCart(product)}
+            onClick={() => onAddToCart(product)}
             disabled={disabled}
             className={`p-2 bg-linear-to-r from-green-500 to-lime-500 text-white rounded-lg transition-all duration-300 shadow-lg ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:from-green-600 hover:to-lime-600 shadow-green-500/30 hover:shadow-green-500/50"}`}
           >
