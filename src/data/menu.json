@@ -20,12 +20,18 @@
   },
   {
     "id": 4,
+    "title": "To'lovlar",
+    "icon": "MdPayment",
+    "path": "/tolovlar"
+  },
+  {
+    "id": 5,
     "title": "Savatcha",
     "icon": "MdShoppingCart",
     "path": "/savatcha"
   },
   {
-    "id": 5,
+    "id": 6,
     "title": "Xisobim",
     "icon": "GiBanknote",
     "path": "/xisobim"

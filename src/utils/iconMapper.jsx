@@ -1,7 +1,7 @@
 import { FaChartLine, FaClipboardList } from "react-icons/fa6"
 import { GiBanknote } from "react-icons/gi"
 import { IoGift } from "react-icons/io5"
-import { MdShoppingCart } from "react-icons/md"
+import { MdShoppingCart, MdPayment } from "react-icons/md"
 
 // Icon mapping object
 export const iconMap = {
@@ -9,6 +9,7 @@ export const iconMap = {
   FaChartLine,
   FaClipboardList,
   MdShoppingCart,
+  MdPayment,
   GiBanknote,
 }
 
