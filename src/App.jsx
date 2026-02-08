@@ -8,6 +8,7 @@ import Shopping from "./pages/student/Shopping"
 import Account from "./pages/student/Account"
 import Cart from "./pages/student/Cart"
 import Attendance from "./pages/student/Attendance"
+import Payments from "./pages/student/Payments"
 import Login from "./pages/Login"
 
 function App() {
@@ -197,6 +198,19 @@ function App() {
           loggedInUser ? (
             <StudentLayout user={loggedInUser} onLogout={handleLogout}>
               <Attendance user={loggedInUser} />
+            </StudentLayout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+
+      <Route
+        path="/tolovlar"
+        element={
+          loggedInUser ? (
+            <StudentLayout user={loggedInUser} onLogout={handleLogout}>
+              <Payments student={loggedInUser} />
             </StudentLayout>
           ) : (
             <Navigate to="/login" />
