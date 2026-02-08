@@ -14,7 +14,11 @@ const StudentLayout = ({ user, onLogout, children }) => {
 
   return (
     <div className="flex min-h-screen bg-zinc-950">
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        user={user}
+      />
 
       <div className="flex-1 flex flex-col lg:ml-[calc(100%/6)]">
         <Header
