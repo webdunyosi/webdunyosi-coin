@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
-import { ToastContainer } from "react-toastify"
+import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import StudentLayout from "./layouts/StudentLayout"
 import Ranking from "./pages/student/Ranking"
@@ -42,7 +42,7 @@ function App() {
 
   const handleAddToCart = (product) => {
     if (!loggedInUser || loggedInUser.coins < product.price) {
-      alert(
+      toast.error(
         `Yetarli coins mavjud emas! Zarur: ${product.price}, Mavjud: ${loggedInUser ? loggedInUser.coins : 0}`,
       )
       return
@@ -73,7 +73,7 @@ function App() {
     const item = cartItems.find((i) => i.id === productId)
     if (!item) return
     if (!loggedInUser || loggedInUser.coins < item.price) {
-      alert(
+      toast.error(
         `Yetarli coins yo'q! Zarur: ${item.price}, Mavjud: ${loggedInUser ? loggedInUser.coins : 0}`,
       )
       return
