@@ -1,4 +1,4 @@
-import { MdPayment, MdCheckCircle, MdWarning } from "react-icons/md"
+import { MdPayment, MdCheckCircle, MdWarning, MdCreditCard, MdContentCopy } from "react-icons/md"
 
 const Payments = ({ student }) => {
   if (!student) {
@@ -140,6 +140,53 @@ const Payments = ({ student }) => {
               <p className="text-gray-400 text-sm">To'lov holati</p>
               <p className={`${status.color} text-xl font-semibold`}>
                 {status.text}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Card Information for Payment */}
+        <div className="bg-zinc-800/70 border border-purple-500/50 rounded-xl p-6 mb-8">
+          <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <MdCreditCard className="w-5 h-5" />
+            To'lov uchun karta ma'lumotlari
+          </h3>
+          
+          <div className="space-y-4">
+            {/* Card Number */}
+            <div className="bg-zinc-900/50 border border-purple-500/20 rounded-lg p-4">
+              <p className="text-gray-400 text-sm mb-2">Karta raqami</p>
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-2xl font-mono font-bold text-purple-400">
+                  4073 4200 6820 8093
+                </span>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText("4073420068208093")
+                      .catch(() => {
+                        // Silently fail if clipboard access is denied
+                      })
+                  }}
+                  className="text-purple-400 hover:text-purple-300 transition-colors"
+                  title="Nusxa olish"
+                >
+                  <MdContentCopy className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Card Holder */}
+            <div className="bg-zinc-900/50 border border-purple-500/20 rounded-lg p-4">
+              <p className="text-gray-400 text-sm mb-2">Karta egasi</p>
+              <span className="text-xl font-semibold text-purple-400">
+                Alimardon Toshpulatov
+              </span>
+            </div>
+
+            {/* Instructions */}
+            <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+              <p className="text-purple-300 text-sm leading-relaxed">
+                💡 To'lovni amalga oshirgandan so'ng, chekni Telegram orqali yuboring.
               </p>
             </div>
           </div>
