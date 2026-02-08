@@ -21,8 +21,8 @@ const Header = ({ student, onLogout, onMenuClick }) => {
           <MdMenu className="w-6 h-6" />
         </button>
 
-        <div className="flex items-center gap-3 px-4 rounded-xl bg-linear-to-r from-green-500/10 to-lime-500/10 border border-green-500/20">
-          <div className="p-2 bg-linear-to-br from-green-400 to-lime-300 rounded-lg">
+        <div className="flex items-center gap-3 px-4 py-1 rounded-xl bg-linear-to-r from-green-500/10 to-lime-500/10 border border-green-500/20">
+          <div className="p-1.5 bg-linear-to-br from-green-400 to-lime-300 rounded-lg">
             <img className="w-5" src="icons/coin.png" alt="Coin" />
           </div>
           <div className="flex flex-col">

@@ -8,12 +8,12 @@
     "coins": 0,
     "avatar": "/students/1.png",
     "role": "student",
-    "courseFee": 600000,
+    "courseFee": 1200000,
     "payments": [
       { "month": 1, "year": 2026, "amount": 600000, "date": "2026-01-15" }
     ],
-    "totalPaid": 600000,
-    "debt": 0
+    "totalPaid": 0,
+    "debt": 1200000
   },
   {
     "id": 2,
@@ -24,12 +24,12 @@
     "coins": 30,
     "avatar": "/students/2.png",
     "role": "student",
-    "courseFee": 500000,
+    "courseFee": 600000,
     "payments": [
-      { "month": 1, "year": 2026, "amount": 300000, "date": "2026-01-10" }
+      { "month": 12, "year": 2025, "amount": 600000, "date": "2025-12-01" }
     ],
-    "totalPaid": 300000,
-    "debt": 200000
+    "totalPaid": 250000,
+    "debt": 350000
   },
   {
     "id": 3,
@@ -42,11 +42,10 @@
     "role": "student",
     "courseFee": 1000000,
     "payments": [
-      { "month": 12, "year": 2025, "amount": 500000, "date": "2025-12-20" },
-      { "month": 1, "year": 2026, "amount": 300000, "date": "2026-01-18" }
+      { "month": 1, "year": 2026, "amount": 500000, "date": "2026-10-22" }
     ],
-    "totalPaid": 800000,
-    "debt": 200000
+    "totalPaid": 500000,
+    "debt": 500000
   },
   {
     "id": 4,
@@ -57,12 +56,12 @@
     "coins": 15,
     "avatar": "/students/4.png",
     "role": "student",
-    "courseFee": 600000,
+    "courseFee": 1000000,
     "payments": [
-      { "month": 1, "year": 2026, "amount": 200000, "date": "2026-01-05" }
+      { "month": 12, "year": 2025, "amount": 500000, "date": "2025-08-19" }
     ],
-    "totalPaid": 200000,
-    "debt": 400000
+    "totalPaid": 0,
+    "debt": 1000000
   },
   {
     "id": 5,
@@ -73,13 +72,12 @@
     "coins": 10,
     "avatar": "/students/5.png",
     "role": "student",
-    "courseFee": 500000,
+    "courseFee": 1200000,
     "payments": [
-      { "month": 12, "year": 2025, "amount": 250000, "date": "2025-12-25" },
-      { "month": 1, "year": 2026, "amount": 250000, "date": "2026-01-22" }
+      { "month": 12, "year": 2025, "amount": 250000, "date": "2025-09-18" }
     ],
-    "totalPaid": 500000,
-    "debt": 0
+    "totalPaid": 0,
+    "debt": 1200000
   },
   {
     "id": 6,
@@ -90,13 +88,12 @@
     "coins": 30,
     "avatar": "/students/6.png",
     "role": "student",
-    "courseFee": 600000,
+    "courseFee": 1000000,
     "payments": [
-      { "month": 11, "year": 2025, "amount": 300000, "date": "2025-11-30" },
-      { "month": 12, "year": 2025, "amount": 200000, "date": "2025-12-28" }
+      { "month": 1, "year": 2026, "amount": 1000000, "date": "2026-01-19" }
     ],
-    "totalPaid": 500000,
-    "debt": 100000
+    "totalPaid": 1000000,
+    "debt": 0
   },
   {
     "id": 7,
@@ -107,10 +104,12 @@
     "coins": 0,
     "avatar": "/students/7.png",
     "role": "student",
-    "courseFee": 1000000,
-    "payments": [],
-    "totalPaid": 0,
-    "debt": 1000000
+    "courseFee": 1200000,
+    "payments": [
+      { "month": 1, "year": 2026, "amount": 600000, "date": "2026-09-03" }
+    ],
+    "totalPaid": 600000,
+    "debt": 600000
   },
   {
     "id": 8,
