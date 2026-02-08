@@ -10,7 +10,7 @@ const Header = ({ student, onLogout, onMenuClick }) => {
   }
 
   return (
-    <header className="sticky top-0 z-40 bg-linear-to-r from-zinc-900/95 via-zinc-950/95 to-zinc-900/95 backdrop-blur-lg text-white p-2 md:p-4 flex justify-between items-center border-b border-green-500/20 shadow-lg shadow-green-500/5">
+    <header className="sticky top-0 z-100 bg-linear-to-r from-zinc-900/95 via-zinc-950/95 to-zinc-900/95 backdrop-blur-lg text-white p-2 md:p-4 flex justify-between items-center border-b border-green-500/20 shadow-lg shadow-green-500/5">
       {/* Left: Menu Button + Coin Balance */}
       <div className="flex items-center gap-4">
         <button

@@ -70,78 +70,76 @@ const Shopping = ({ student, onAddToCart }) => {
   const unpaidMonths = getUnpaidMonths()
 
   return (
-    <div className="w-full relative min-h-full bg-zinc-950">
-      {/* Red Background Overlay for Debt */}
-      {hasDebt && (
-        <div className="absolute inset-0 bg-red-600/30 z-[5]"></div>
-      )}
+    <>
+      <div className="w-full relative min-h-full bg-zinc-950">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-linear-to-br from-green-900/10 via-transparent to-blue-900/10"></div>
 
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-linear-to-br from-green-900/10 via-transparent to-blue-900/10"></div>
+        {/* Content - Apply blur when debt exists */}
+        <div className={`relative z-10 p-4 md:p-6 lg:p-8 ${hasDebt ? "blur-sm pointer-events-none" : ""}`}>
+          <div className="mb-6 md:mb-8">
+            <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-white flex items-center gap-2">
+              <LuClipboardList className="w-8 h-8" />
+              <span>Sovg'alar va mahsulotlar</span>
+            </div>
+            <p className="text-gray-400 text-sm md:text-base mt-2">
+              Tishga yoqadigan sovg'alarni tanlang
+            </p>
+          </div>
 
-      {/* Content */}
-      <div className="relative z-10 p-4 md:p-6 lg:p-8">
-        {/* Debt Warning Banner */}
+          {/* Products Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={onAddToCart}
+                disabled={hasDebt}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Overlay Modal for Debt - Positioned absolutely within the shopping container */}
         {hasDebt && (
-          <div className="mb-6 md:mb-8 bg-red-500/90 border-2 border-red-400 rounded-xl p-6 shadow-2xl relative z-20">
-            <div className="flex items-start gap-4">
-              <MdWarning className="w-8 h-8 md:w-10 md:h-10 text-white flex-shrink-0 mt-1" />
-              <div className="flex-1">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+          <div className="absolute inset-0 z-50 flex items-center justify-center bg-red-600/40 backdrop-blur-md">
+            <div className="bg-red-500/95 border-4 border-red-400 rounded-2xl p-8 md:p-10 shadow-2xl max-w-2xl mx-4 animate-fadeIn">
+              <div className="flex flex-col items-center text-center">
+                <MdWarning className="w-16 h-16 md:w-20 md:h-20 text-white mb-6" />
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
                   Qarzdorlik haqida ogohlantirish!
                 </h3>
-                <div className="space-y-2 text-white">
-                  <p className="text-base md:text-lg">
+                <div className="space-y-4 text-white w-full bg-red-600/30 rounded-xl p-6">
+                  <p className="text-lg md:text-xl">
                     <span className="font-semibold">Sabab:</span> Kurs to'lovi to'liq to'lanmagan
                   </p>
-                  <p className="text-base md:text-lg">
+                  <p className="text-lg md:text-xl">
                     <span className="font-semibold">Qarz miqdori:</span>{" "}
-                    <span className="text-2xl font-bold">{formatCurrency(student.debt)} so'm</span>
+                    <span className="text-3xl font-bold block mt-2">{formatCurrency(student.debt)} so'm</span>
                   </p>
                   {unpaidMonths.length > 0 && (
-                    <p className="text-base md:text-lg">
+                    <p className="text-lg md:text-xl">
                       <span className="font-semibold">To'lanmagan oylar:</span>{" "}
-                      {unpaidMonths.map((m, i) => (
-                        <span key={i}>
-                          {m.month} {m.year}
-                          {i < unpaidMonths.length - 1 ? ", " : ""}
-                        </span>
-                      ))}
+                      <span className="block mt-2 text-xl font-semibold">
+                        {unpaidMonths.map((m, i) => (
+                          <span key={i}>
+                            {m.month} {m.year}
+                            {i < unpaidMonths.length - 1 ? ", " : ""}
+                          </span>
+                        ))}
+                      </span>
                     </p>
                   )}
                 </div>
-                <p className="text-sm md:text-base text-red-100 mt-3">
-                  Iltimos, qarzdorlikni to'ldiring. Sovg'alarni sotib olish uchun avval to'lovni amalga oshiring.
+                <p className="text-base md:text-lg text-white mt-6 bg-red-600/50 rounded-lg p-4">
+                  ⚠️ Iltimos, qarzdorlikni to'ldiring. To'lov amalga oshirilgandan so'ng sovg'alarni sotib olish imkoniyati ochiladi.
                 </p>
               </div>
             </div>
           </div>
         )}
-
-        <div className="mb-6 md:mb-8">
-          <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-white flex items-center gap-2">
-            <LuClipboardList className="w-8 h-8" />
-            <span>Sovg'alar va mahsulotlar</span>
-          </div>
-          <p className="text-gray-400 text-sm md:text-base mt-2">
-            Tishga yoqadigan sovg'alarni tanlang
-          </p>
-        </div>
-
-        {/* Products Grid with dimming effect when debt exists */}
-        <div 
-          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ${hasDebt ? "opacity-60" : ""}`}
-        >
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={onAddToCart}
-            />
-          ))}
-        </div>
       </div>
-    </div>
+    </>
   )
 }
 

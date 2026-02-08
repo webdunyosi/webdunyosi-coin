@@ -1,14 +1,29 @@
 import { MdShoppingCart } from "react-icons/md"
 
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product, onAddToCart, disabled = false }) => {
+  const handleClick = (e) => {
+    if (disabled) {
+      e.preventDefault()
+      e.stopPropagation()
+      return
+    }
+    onAddToCart(product)
+  }
+
   return (
-    <div className="bg-linear-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur border border-green-500/20 hover:border-green-500/50 p-4 md:p-5 rounded-xl shadow-lg hover:shadow-green-500/20 transition-all duration-300 hover:scale-105 group">
+    <div className={`bg-linear-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur border border-green-500/20 p-4 md:p-5 rounded-xl shadow-lg transition-all duration-300 ${
+      disabled 
+        ? "cursor-not-allowed opacity-50" 
+        : "hover:border-green-500/50 hover:shadow-green-500/20 hover:scale-105 group"
+    }`}>
       {/* Image */}
       <div className="relative mb-4 overflow-hidden rounded-lg bg-zinc-900/50 p-3">
         <img
           src={product.image}
           alt={product.title}
-          className="w-full h-40 object-contain group-hover:scale-110 transition-transform duration-300"
+          className={`w-full h-40 object-contain transition-transform duration-300 ${
+            disabled ? "" : "group-hover:scale-110"
+          }`}
         />
       </div>
 
@@ -25,8 +40,13 @@ const ProductCard = ({ product, onAddToCart }) => {
             {product.price} Coin
           </p>
           <button
-            onClick={() => onAddToCart(product)}
-            className="cursor-pointer p-2 bg-linear-to-r from-green-500 to-lime-500 hover:from-green-600 hover:to-lime-600 text-white rounded-lg transition-all duration-300 shadow-lg shadow-green-500/30 hover:shadow-green-500/50"
+            onClick={handleClick}
+            disabled={disabled}
+            className={`p-2 text-white rounded-lg transition-all duration-300 shadow-lg ${
+              disabled 
+                ? "bg-gray-600 cursor-not-allowed" 
+                : "cursor-pointer bg-linear-to-r from-green-500 to-lime-500 hover:from-green-600 hover:to-lime-600 shadow-green-500/30 hover:shadow-green-500/50"
+            }`}
           >
             <MdShoppingCart className="w-5 h-5" />
           </button>
