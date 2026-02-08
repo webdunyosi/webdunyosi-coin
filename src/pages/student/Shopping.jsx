@@ -89,6 +89,7 @@ const Shopping = ({ student, onAddToCart }) => {
         {/* Products Grid with blocking when debt exists */}
         <div 
           className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 ${hasDebt ? "pointer-events-none select-none" : ""}`}
+          aria-hidden={hasDebt ? "true" : "false"}
         >
           {products.map((product) => (
             <ProductCard
@@ -103,7 +104,12 @@ const Shopping = ({ student, onAddToCart }) => {
 
       {/* Payment Required Modal Overlay */}
       {hasDebt && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="debt-modal-title"
+        >
           {/* Red Blur Background */}
           <div 
             className="absolute inset-0 bg-red-600/40 backdrop-blur-md"
@@ -111,15 +117,15 @@ const Shopping = ({ student, onAddToCart }) => {
           ></div>
           
           {/* Modal Content */}
-          <div className="relative bg-zinc-900/95 border-4 border-red-500 rounded-2xl p-6 md:p-8 lg:p-10 max-w-2xl w-full shadow-2xl shadow-red-500/50 animate-pulse">
+          <div className="relative bg-zinc-900/95 border-4 border-red-500 rounded-2xl p-6 md:p-8 lg:p-10 max-w-2xl w-full shadow-2xl shadow-red-500/50 motion-reduce:animate-none animate-pulse">
             <div className="flex flex-col items-center text-center space-y-6">
               {/* Warning Icon */}
               <div className="bg-red-500/20 p-6 rounded-full">
-                <MdWarning className="w-16 h-16 md:w-20 md:h-20 text-red-500" />
+                <MdWarning className="w-16 h-16 md:w-20 md:h-20 text-red-500" aria-hidden="true" />
               </div>
 
               {/* Title */}
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+              <h2 id="debt-modal-title" className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
                 To'lov qilinmagan!
               </h2>
 
