@@ -68,7 +68,7 @@ const Cart = ({
             <div className="text-6xl mb-4 text-gray-600">📭</div>
             <p className="text-gray-400 text-lg mb-4">Savatcha bo'sh</p>
             <p className="text-gray-500 text-sm text-center">
-              Sovg'alarni tanlab olib, savatchasiga qo'shing
+              Sovg'alarni tanlab olib, savatchaga qo'shing
             </p>
           </div>
         ) : (
